@@ -1,1 +1,268 @@
-http://localhost:8158/page3.html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Kamu ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 420px;
+      background: white;
+      border-radius: 25px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .page {
+      display: none;
+      animation: muncul 0.5s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes muncul {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .emoji {
+      font-size: 70px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      color: #ff4f81;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    button {
+      border: none;
+      padding: 13px 28px;
+      border-radius: 30px;
+      font-size: 17px;
+      cursor: pointer;
+      margin: 7px;
+      transition: 0.2s;
+    }
+
+    .next,
+    .yes {
+      background: #ff4f81;
+      color: white;
+    }
+
+    .next:hover,
+    .yes:hover {
+      transform: scale(1.08);
+      background: #ff2f68;
+    }
+
+    .no {
+      background: #ddd;
+      color: #333;
+      position: relative;
+    }
+
+    #buttons {
+      position: relative;
+      min-height: 70px;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 25px;
+      animation: naik 4s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes naik {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HALAMAN 1 -->
+  <div class="page active" id="page1">
+    <div class="emoji">💌</div>
+    <h1>Hai teteh dita</h1>
+    <p>
+      Aku punya sesuatu yang mau aku sampaikan...
+      Tapi kamu harus lanjut ke halaman berikutnya dulu 
+    </p>
+    <button class="next" onclick="nextPage(2)">
+      Lanjut ❤️
+    </button>
+  </div>
+
+
+  <!-- HALAMAN 2 -->
+  <div class="page" id="page2">
+    <div class="emoji">😊</div>
+    <h1>Sebenarnya...</h1>
+    <p>
+      Aku itu mau deket sama teteh tapi teteh kayanya gabisa buat deket sama aku,
+      pas awal ketemu aku liatin teteh terus.
+    </p>
+    <button class="next" onclick="nextPage(3)">
+      Lanjut →
+    </button>
+  </div>
+
+
+  <!-- HALAMAN 3 -->
+  <div class="page" id="page3">
+    <div class="emoji">❤️</div>
+    <h1>Aku mau jujur...</h1>
+    <p>
+      Aku suka sama teteh tapi aku ga bermaksud mau pacaran sama teteh, pas awal ketemu soalnya teteh itu cantik,pendek,lucu
+      tapi aku ga berani buat bilang langsung sama teteh.(maaf kalo ada kata yang teteh gasuka)
+    </p>
+    <button class="next" onclick="nextPage(4)">
+      Lanjut 😳
+    </button>
+  </div>
+
+
+  <!-- HALAMAN 4 -->
+  <div class="page" id="page4">
+    <div class="emoji">🥺</div>
+    <h1>Mau ngga?</h1>
+    <p>
+      Mau ga teteh jadi temen deket aku?
+    </p>
+
+    <div id="buttons">
+      <button class="yes" onclick="jawabIya()">
+        IYA ❤️
+      </button>
+
+      <button class="no" id="noButton"
+              onmouseover="lari()"
+              ontouchstart="lari()">
+        TIDAK 😝
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+
+  // GANTI DENGAN NOMOR WHATSAPP KAMU
+  const nomorWhatsApp = "628211654690";
+
+  function nextPage(pageNumber) {
+
+    document.querySelectorAll(".page").forEach(page => {
+      page.classList.remove("active");
+    });
+
+    document.getElementById("page" + pageNumber)
+      .classList.add("active");
+
+    buatHati();
+  }
+
+
+  function lari() {
+
+    const tombol = document.getElementById("noButton");
+
+    const maxX = window.innerWidth - tombol.offsetWidth - 20;
+    const maxY = window.innerHeight - tombol.offsetHeight - 20;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    tombol.style.position = "fixed";
+    tombol.style.left = x + "px";
+    tombol.style.top = y + "px";
+  }
+
+
+  function jawabIya() {
+
+    const pesan =
+      "Hai ❤️ Aku sudah memilih IYA! 😳❤️";
+
+    const url =
+      "https://wa.me/" +
+      nomorWhatsApp +
+      "?text=" +
+      encodeURIComponent(pesan);
+
+    window.location.href = url;
+  }
+
+
+  function buatHati() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left =
+      Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+      (3 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+</script>
+
+</body>
+  </html>
