@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card {
+  width: 90%;
+  max-width: 420px;
+  background: white;
+  padding: 30px 20px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+.page {
+  display: none;
+  animation: masuk .5s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes masuk {
+  from {
+    opacity: 0;
+    transform: scale(.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.emoji {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  color: #ff477e;
+}
+
+p {
+  color: #555;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 28px;
+  margin: 8px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.next,
+.yes {
+  background: #ff477e;
+  color: white;
+}
+
+.next:hover,
+.yes:hover {
+  transform: scale(1.08);
+}
+
+.no {
+  background: #ddd;
+  color: #333;
+  position: relative;
+  transition: left .15s, top .15s;
+}
+
+#areaTombol {
+  position: relative;
+  min-height: 100px;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  font-size: 25px;
+  pointer-events: none;
+  animation: terbang 4s linear forwards;
+}
+
+@keyframes terbang {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- HALAMAN 1 -->
+  <section class="page active" id="page1">
+    <div class="emoji">💌</div>
+    <h1>Hai nabila</h1>
+
+    <p>
+      Aku punya sesuatu yang mau aku sampaikan.
+      Tapi kamu harus lanjut dulu ya 
+    </p>
+
+    <button class="next" onclick="nextPage(2)">
+      Lanjut →
+    </button>
+  </section>
+
+
+  <!-- HALAMAN 2 -->
+  <section class="page" id="page2">
+    <div class="emoji"></div>
+    <h1>Sebenarnya...</h1>
+
+    <p>
+      Aku ga enak buat chat kamu karena aku udah nyakitin kamu terus
+    </p>
+
+    <button class="next" onclick="nextPage(3)">
+      Lanjut ❤️
+    </button>
+  </section>
+
+
+  <!-- HALAMAN 3 -->
+  <section class="page" id="page3">
+    <div class="emoji">🫶</div>
+    <h1>aku mau bilang</h1>
+
+    <p>
+      Jadi...
+      kamu itu sebenarnya gamau asing sama aku kan? tapi kamu maksa diri kamu biar asing sama aku kan?
+    </p>
+
+    <div id="areaTombol">
+
+      <button class="yes" onclick="jawabIya()">
+        IYA ❤️
+      </button>
+
+      <button
+        class="no"
+        id="tombolTidak"
+        onmouseenter="kabur()"
+        ontouchstart="kabur()">
+        TIDAK 😝
+      </button>
+
+    </div>
+  </section>
+
+</div>
+
+
+<script>
+
+// ================================
+// GANTI NOMOR WHATSAPP DI SINI
+// ================================
+const nomorWhatsApp = "628211654690";
+
+
+// PINDAH HALAMAN
+function nextPage(nomor) {
+
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page" + nomor)
+    .classList.add("active");
+
+  buatHati();
+}
+
+
+// TOMBOL TIDAK KABUR
+function kabur() {
+
+  const tombol = document.getElementById("tombolTidak");
+
+  const jarakX =
+    Math.random() * (window.innerWidth - tombol.offsetWidth - 30);
+
+  const jarakY =
+    Math.random() * (window.innerHeight - tombol.offsetHeight - 30);
+
+  tombol.style.position = "fixed";
+  tombol.style.left = Math.max(10, jarakX) + "px";
+  tombol.style.top = Math.max(10, jarakY) + "px";
+}
+
+
+// KETIKA IYA DITEKAN
+function jawabIya() {
+
+  const pesan =
+    "Hai ❤️Aku pilih IYA! ❤️";
+
+  const link =
+    "https://wa.me/" +
+    nomorWhatsApp +
+    "?text=" +
+    encodeURIComponent(pesan);
+
+  window.location.href = link;
+}
+
+
+// ANIMASI HATI
+function buatHati() {
+
+  for (let i = 0; i < 5; i++) {
+
+    const hati = document.createElement("div");
+
+    hati.className = "heart";
+    hati.innerHTML = "❤️";
+
+    hati.style.left =
+      Math.random() * 100 + "vw";
+
+    hati.style.animationDuration =
+      (3 + Math.random() * 3) + "s";
+
+    document.body.appendChild(hati);
+
+    setTimeout(function() {
+      hati.remove();
+    }, 6000);
+  }
+}
+
+</script>
+
+</body>
+  </html>
